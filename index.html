@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לימוד ותרגול ארמית לגמרא</title>
+<meta name="description" content="תרגול ולימוד ארמית לגמרא: חידון, כרטיסיות זיכרון ומילון מונחים עם שמירת התקדמות.">
+<meta name="theme-color" content="#0f172a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ארמית לגמרא - תרגול ולימוד יומי">
+<meta property="og:description" content="חידון, כרטיסיות זיכרון ומילון מונחי ארמית לגמרא.">
+<meta property="og:locale" content="he_IL">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d97706'/%3E%3Ctext x='50' y='72' font-size='64' font-weight='bold' text-anchor='middle' fill='%230f172a' font-family='serif'%3E%D7%92%3C/text%3E%3C/svg%3E">
+<script>
+(function () {
+  const w = console.warn;
+  console.warn = function () {
+    if (String(arguments[0] || '').includes('cdn.tailwindcss.com should not be used')) return;
+    w.apply(console, arguments);
+  };
+})();
+</script>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Hofshi:wght@400;600;700;900&family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { gemara: { 50:'#f4f7fb', 100:'#e5ecf6', 200:'#cddbe1', 600:'#1e3a8a', 700:'#172554', 800:'#0f172a', gold:'#d97706' } },
+  fontFamily: { serif: ['"Frank Ruhl Hofshi"','Georgia','serif'], sans: ['Heebo','sans-serif'] }
+} } }
+</script>
+<style>
+body { font-family:'Heebo',sans-serif; background:#f8fafc; }
+.font-gemara { font-family:'Frank Ruhl Hofshi',Georgia,serif; }
+.perspective-1000 { perspective:1000px; }
+.transform-style-3d { transform-style:preserve-3d; }
+.backface-hidden { backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+.rotate-y-180 { transform:rotateY(180deg); }
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:#f1f5f9; }
+::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 bg-slate-50 selection:bg-amber-200 selection:text-slate-900">
+
+<header class="bg-gemara-800 text-white shadow-md sticky top-0 z-50 border-b border-amber-600/30">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-gemara-gold flex items-center justify-center text-slate-950 font-bold shadow-lg font-gemara text-2xl">ג</div>
+      <div>
+        <h1 class="text-xl md:text-2xl font-black font-gemara tracking-wide text-amber-400">ארמית לגמרא</h1>
+        <p class="text-xs text-slate-300 font-light">מערכת תרגול ולימוד יומי למונחי התלמוד</p>
+      </div>
+    </div>
+    <nav class="flex items-center bg-gemara-700/80 p-1 rounded-xl border border-slate-700/60">
+      <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="nav-tab flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all text-amber-300 bg-gemara-800 shadow-sm"><i data-lucide="help-circle" class="w-4 h-4"></i><span>תרגול וחידון</span></button>
+      <button onclick="switchTab('cards')" id="tab-btn-cards" class="nav-tab flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all"><i data-lucide="layers" class="w-4 h-4"></i><span>כרטיסיות זיכרון</span></button>
+      <button onclick="switchTab('dict')" id="tab-btn-dict" class="nav-tab flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all"><i data-lucide="book-open" class="w-4 h-4"></i><span>מילון מונחים</span></button>
+    </nav>
+  </div>
+</header>
+
+<noscript><p style="padding:2rem;text-align:center">האתר דורש הפעלת JavaScript.</p></noscript>
+<main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
+
+  <!-- QUIZ -->
+  <section id="section-quiz" class="tab-content space-y-6">
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 bg-amber-100 text-amber-700 rounded-xl"><i data-lucide="award" class="w-6 h-6"></i></div>
+        <div>
+          <span class="text-xs text-slate-500 font-medium block">התקדמות במבחן הנוכחי</span>
+          <span id="quiz-progress-text" class="text-lg font-bold text-slate-800">שאלה 1 מתוך 5</span>
+        </div>
+      </div>
+      <div class="w-full sm:w-48 bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200">
+        <div id="quiz-progress-bar" class="bg-gradient-to-r from-amber-500 to-amber-600 h-full transition-all duration-500" style="width:20%"></div>
+      </div>
+      <button onclick="restartQuiz()" class="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-gemara-600 font-medium bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg transition-colors"><i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>שאלות חדשות</button>
+    </div>
+
+    <!-- Saved progress -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 grid grid-cols-3 gap-2 text-center">
+      <div><div class="text-xs text-slate-500">השיא שלי</div><div class="text-lg font-bold text-amber-600"><span id="stat-best">0</span>/5</div></div>
+      <div><div class="text-xs text-slate-500">מבחנים שהושלמו</div><div id="stat-played" class="text-lg font-bold text-slate-800">0</div></div>
+      <div><div class="text-xs text-slate-500">מונחים שנלמדו</div><div class="text-lg font-bold text-emerald-600"><span id="stat-mastered">0</span>/<span id="stat-total">0</span></div></div>
+    </div>
+
+    <div id="quiz-card-container" class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden">
+      <div class="bg-gradient-to-r from-gemara-800 to-gemara-700 p-6 md:p-8 text-white">
+        <span class="inline-block bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs px-3 py-1 rounded-full font-medium mb-3">ארמית תלמודית</span>
+        <h2 id="question-text" class="text-2xl md:text-3xl font-black font-gemara tracking-wide leading-relaxed text-slate-100">טוען שאלה...</h2>
+      </div>
+      <div class="p-6 md:p-8 space-y-3" id="options-container"></div>
+      <div id="feedback-container" class="hidden mx-6 md:mx-8 mb-6 p-4 rounded-xl border">
+        <div class="flex items-start gap-3">
+          <div id="feedback-icon" class="mt-0.5"></div>
+          <div>
+            <h4 id="feedback-title" class="font-bold text-base mb-1"></h4>
+            <p id="feedback-explanation" class="text-sm leading-relaxed text-slate-700"></p>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 md:px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+        <div class="text-xs text-slate-500">ניקוד נוכחי: <span id="current-score" class="font-bold text-amber-600 text-sm">0</span>/5</div>
+        <button id="next-btn" onclick="nextQuestion()" class="hidden bg-gemara-600 hover:bg-gemara-700 text-white font-medium px-6 py-2.5 rounded-xl transition-all shadow-md items-center gap-2">
+          <span>שאלה הבאה</span><i data-lucide="arrow-left" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="quiz-summary" class="hidden bg-white rounded-2xl shadow-xl border border-amber-200 p-8 text-center space-y-6">
+      <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto shadow-inner"><i data-lucide="trophy" class="w-10 h-10"></i></div>
+      <div>
+        <h3 class="text-2xl font-black font-gemara text-gemara-800">כל הכבוד! סיימת את המבחן</h3>
+        <p class="text-slate-600 text-sm mt-1">הנה סיכום הביצועים שלך בסיבוב הזה</p>
+      </div>
+      <div class="inline-block bg-slate-50 border border-slate-200 rounded-2xl px-8 py-4">
+        <div class="text-4xl font-extrabold text-amber-600 font-gemara" id="final-score">0 / 5</div>
+        <div class="text-xs text-slate-500 mt-1" id="score-percentage">0% הצלחה</div>
+      </div>
+      <div id="summary-feedback-msg" class="text-sm font-medium text-slate-700 max-w-md mx-auto"></div>
+      <div class="pt-4 flex flex-wrap justify-center gap-4">
+        <button onclick="restartQuiz()" class="bg-gemara-600 hover:bg-gemara-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2"><i data-lucide="refresh-cw" class="w-4 h-4"></i><span>תרגול 5 שאלות נוספות</span></button>
+        <button onclick="switchTab('cards')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-6 py-3 rounded-xl transition-all flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4"></i><span>חזרה לכרטיסיות זיכרון</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section id="section-cards" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap justify-between items-center gap-4">
+      <div>
+        <h3 class="font-bold text-slate-800 text-lg font-gemara">כרטיסיות זיכרון</h3>
+        <p class="text-xs text-slate-500">לחץ על הכרטיס כדי להפוך אותו ולראות את הפירוש וההסבר</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="card-counter" class="text-xs font-semibold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200"></span>
+        <button onclick="shuffleFlashcards()" class="p-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 transition-colors" title="ערבב כרטיסיות"><i data-lucide="shuffle" class="w-4 h-4"></i></button>
+        <button onclick="resetProgress()" class="p-2 bg-slate-100 hover:bg-rose-100 rounded-lg text-slate-700 hover:text-rose-700 transition-colors" title="אפס התקדמות"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+      </div>
+    </div>
+
+    <div class="max-w-xl mx-auto perspective-1000 my-8">
+      <div id="flashcard" onclick="flipCard()" class="relative w-full h-80 rounded-3xl shadow-xl cursor-pointer transition-transform duration-500 transform-style-3d bg-white border-2 border-amber-500/20">
+        <div class="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-gemara-800 to-gemara-700 text-white rounded-3xl p-8 flex flex-col justify-between items-center text-center shadow-lg border border-amber-400/30">
+          <div class="w-full flex justify-between items-center text-xs text-amber-300/80 font-medium">
+            <span id="card-category-tag"></span>
+            <span class="flex items-center gap-1"><i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> לחץ להיפוך</span>
+          </div>
+          <div class="my-auto">
+            <div id="card-front-text" class="text-4xl md:text-5xl font-black font-gemara tracking-wide text-amber-300 mb-3"></div>
+            <p class="text-xs text-slate-300">מה הפירוש והתפקיד של מילה זו בגמרא?</p>
+          </div>
+          <div class="text-xs text-slate-400 font-light">לחץ לצפייה בפירוש</div>
+        </div>
+        <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-white text-slate-800 rounded-3xl p-8 flex flex-col justify-between items-center text-center border-2 border-amber-500 shadow-xl">
+          <div class="w-full flex justify-between items-center text-xs text-slate-400">
+            <span class="font-bold text-amber-600">פירוש והסבר</span><span>לחץ לחזרה</span>
+          </div>
+          <div class="my-auto space-y-3">
+            <h4 id="card-back-title" class="text-2xl font-bold font-gemara text-gemara-800"></h4>
+            <p id="card-back-meaning" class="text-lg font-bold text-amber-700 bg-amber-50 px-4 py-2 rounded-xl border border-amber-200 inline-block"></p>
+            <p id="card-back-explanation" class="text-sm text-slate-600 leading-relaxed max-w-md mx-auto"></p>
+          </div>
+          <div class="text-xs text-slate-400">כרטיסיה לימודית בארמית</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center gap-4 max-w-md mx-auto">
+      <button onclick="prevCard()" class="p-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-2xl shadow-sm transition-all flex items-center gap-2"><i data-lucide="chevron-right" class="w-5 h-5"></i><span class="text-sm font-medium">הקודם</span></button>
+      <button id="master-btn" onclick="toggleMasteredCurrentCard()" class="px-4 py-3 rounded-2xl transition-all flex items-center gap-2 text-sm font-medium"><span id="master-btn-text"></span></button>
+      <button onclick="nextCard()" class="p-3 bg-gemara-600 hover:bg-gemara-700 text-white rounded-2xl shadow-md transition-all flex items-center gap-2"><span class="text-sm font-medium">הבא</span><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+    </div>
+  </section>
+
+  <!-- DICTIONARY -->
+  <section id="section-dict" class="tab-content hidden space-y-6">
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-black font-gemara text-slate-800">מילון מונחי ארמית לגמרא</h3>
+          <p class="text-xs text-slate-500">מאגר של המילים והביטויים הנפוצים ביותר בש"ס</p>
+        </div>
+        <div class="relative min-w-[280px]">
+          <input type="text" id="dict-search" oninput="renderDictionary()" placeholder="חפש מילה בארמית או פירוש בעברית..." class="w-full pr-10 pl-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-all">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5"></i>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100" id="category-filters"></div>
+    </div>
+    <div id="dictionary-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+  <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div class="font-gemara font-bold text-slate-700 text-sm">תרגול ארמית לגמרא &copy; 2026</div>
+    <p>חזק חזק ונתחזק - מיועד להקלת הלימוד והבנת לימוד הגמרא</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Audio ---------- */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+function playSound(type) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    const t = audioCtx.currentTime;
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, t); osc.frequency.setValueAtTime(659.25, t + 0.1); osc.frequency.setValueAtTime(783.99, t + 0.2);
+      gain.gain.setValueAtTime(0.3, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+      osc.start(t); osc.stop(t + 0.5);
+    } else if (type === 'wrong') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(220, t); osc.frequency.setValueAtTime(180, t + 0.15);
+      gain.gain.setValueAtTime(0.3, t); gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      osc.start(t); osc.stop(t + 0.35);
+    } else {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, t); osc.frequency.exponentialRampToValueAtTime(200, t + 0.08);
+      gain.gain.setValueAtTime(0.15, t); gain.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
+      osc.start(t); osc.stop(t + 0.08);
+    }
+  } catch (e) {}
+}
+
+/* ---------- Data ---------- */
+const MASTER_DICTIONARY = [
+  { term:"מאי שנא", category:"קושיא", meaning:"מה שונה?", explanation:"מילת קושיא השואלת מדוע יש שוני או חילוק בין מקרה אחד למקרה אחר.", example:"מאי שנא הכא ומאי שנא התם?" },
+  { term:"פשיטא", category:"קושיא", meaning:"פשוט הוא הדבר!", explanation:"מילת תמיהה השואלת: הרי הדבר מובן מאליו, למה הוצרכה המשנה/הברייתא ללמד זאת?", example:"פשיטא! מאי קא משמע לן?" },
+  { term:"הכי קאמר", category:"תירוץ", meaning:"כך הוא אומר", explanation:"מילת תירוץ המבארת ומפשרת את ניסוח המשנה או הברייתא – 'כך הייתה כוונתו לומר'.", example:"הכי קאמר: במה דברים אמורים..." },
+  { term:"איכא דאמרי", category:"כללי", meaning:"יש שאומרים", explanation:"פתיחה המביאה נוסח חלופי, לישנא אחרינא או דעה נוספת בדיון.", example:"איכא דאמרי: מתניתין פליגא עליה." },
+  { term:"מאי טעמא", category:"קושיא", meaning:"מה הטעם / מה הסיבה?", explanation:"שאלה המבקשת את הנימוק או המקור להלכה שנאמרה.", example:"מאי טעמא דאמר רב..." },
+  { term:"תניא", category:"ראיה/הוכחה", meaning:"שנויה ברייתא", explanation:"מילת פתיחה לציטוט ברייתא (דברי תנאים שלא נכנסו לששת סדרי משנה).", example:"תניא כוותיה דרב..." },
+  { term:"ליכא", category:"שלול/יחס", meaning:"אין / אין כאן", explanation:"מילת שלילה (ההפך מ'איכא' שפירושה יש).", example:"איכא למאן דאמר... וליכא למאן דאמר..." },
+  { term:"הכא", category:"מקום/זמן", meaning:"כאן / פה", explanation:"מילת מקום המתייחסת לסוגיה או למקרה הנדון במקומו.", example:"הכא במאי עסקינן?" },
+  { term:"התם", category:"מקום/זמן", meaning:"שם", explanation:"מילת מקום המתייחסת למקרה או לסוגיה במקום אחר בש\"ס.", example:"כדאמרינן התם..." },
+  { term:"מאי בינייהו", category:"קושיא", meaning:"מה ההבדל ביניהם?", explanation:"שאלה המבקשת למצוא את ההבדל המעשי (הנפקא מינה) בין שתי דעות שונות.", example:"איכא בינייהו קרא..." },
+  { term:"דיקא נמי", category:"ראיה/הוכחה", meaning:"מדויק גם כן", explanation:"ביטוי המביא ראיה מתוך דיוק בלשון המשנה או הברייתא לסיוע לדבר שנאמר.", example:"דיקא נמי דקתני..." },
+  { term:"תנן", category:"ראיה/הוכחה", meaning:"שנינו במשנה", explanation:"מילת פתיחה לציטוט דברי משנה (בשונה מ'תניא' שמביאה ברייתא).", example:"תנן: הכל חייבין בראייה..." },
+  { term:"מתקיף לה", category:"קושיא", meaning:"מקשה עליה", explanation:"פתיחה לקושיא חריפה המבוססת על הסברה וההיגיון (לעיתים קרובות מאמורא מסוים).", example:"מתקיף לה רב נחמן..." },
+  { term:"מכלל ד...", category:"ראיה/הוכחה", meaning:"מכאן ש... / משמע מכך ש...", explanation:"הסקה הגיונית שאינה מפורשת, אלא נלמדת מתוך הדברים שנאמרו.", example:"מכלל דאיכא דפליג?" },
+  { term:"נפקא מינה", category:"תירוץ", meaning:"יוצא ממנה / תוצאה מעשית", explanation:"החילוק וההבדל המעשי להלכה שיוצא מתוך מחלוקת או חקירה.", example:"מאי נפקא מינה? למקח וממכר." },
+  { term:"שמע מינה", category:"ראיה/הוכחה", meaning:"למד ממנה / הסק מכך (מסקנה)", explanation:"מילת סיכום הקובעת שהוכחה או מסקנה מסוימת אכן התקבלה (שמ\"מ).", example:"שמע מינה תלת..." },
+  { term:"קא משמע לן", category:"תירוץ", meaning:"משמיע לנו (קמ\"ל)", explanation:"ביטוי המבאר מהו החידוש שבא הכתוב או התנא ללמדנו.", example:"קא משמע לן דאפילו במקום הזה..." }
+];
+
+const CATEGORIES = [
+  ['ALL','הכל'], ['קושיא','מילות קושיא'], ['תירוץ','מילות תירוץ'], ['ראיה/הוכחה','הוכחה וראיה'],
+  ['מקום/זמן','מקום וזמן'], ['כללי','כללי'], ['שלול/יחס','שלילה ויחס']
+];
+const PILL_ON = "cat-filter-btn bg-gemara-800 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-all";
+const PILL_OFF = "cat-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium transition-all";
+
+/* ---------- Helpers ---------- */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+const $ = id => document.getElementById(id);
+function refreshIcons() { try { if (window.lucide) lucide.createIcons(); } catch (e) {} }
+const QUIZ_LEN = 5;
+
+/* ---------- Saved progress (localStorage) ---------- */
+const STORAGE_KEY = 'gemara-aramit-progress-v1';
+let masteredCards = new Set();
+let bestScore = 0, quizzesPlayed = 0;
+
+function loadProgress() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!raw) return;
+    const known = new Set(MASTER_DICTIONARY.map(d => d.term));
+    masteredCards = new Set((Array.isArray(raw.mastered) ? raw.mastered : []).filter(t => known.has(t)));
+    bestScore = Math.min(QUIZ_LEN, Math.max(0, +raw.best || 0));
+    quizzesPlayed = Math.max(0, +raw.played || 0);
+  } catch (e) {}
+}
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ mastered: [...masteredCards], best: bestScore, played: quizzesPlayed }));
+  } catch (e) {}
+}
+function renderStats() {
+  $('stat-best').innerText = bestScore;
+  $('stat-played').innerText = quizzesPlayed;
+  $('stat-mastered').innerText = masteredCards.size;
+  $('stat-total').innerText = MASTER_DICTIONARY.length;
+}
+function resetProgress() {
+  if (!confirm('לאפס את כל ההתקדמות השמורה (שיא, מבחנים וכרטיסיות שנלמדו)?')) return;
+  masteredCards = new Set(); bestScore = 0; quizzesPlayed = 0;
+  saveProgress(); renderStats(); updateMasterBtnUI(); renderDictionary();
+}
+
+/* ---------- State ---------- */
+let currentQuizQuestions = [], currentQuestionIdx = 0, score = 0, answered = false;
+let flashcardsList = [...MASTER_DICTIONARY], currentCardIdx = 0, isCardFlipped = false;
+let currentCategoryFilter = 'ALL';
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadProgress();
+  renderCategoryFilters();
+  renderStats();
+  initQuizData();
+  renderFlashcard();
+  renderDictionary();
+  refreshIcons();
+});
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.nav-tab').forEach(el => {
+    el.classList.remove('text-amber-300', 'bg-gemara-800', 'shadow-sm');
+    el.classList.add('text-slate-300');
+  });
+  $(`section-${tabId}`).classList.remove('hidden');
+  const btn = $(`tab-btn-${tabId}`);
+  btn.classList.add('text-amber-300', 'bg-gemara-800', 'shadow-sm');
+  btn.classList.remove('text-slate-300');
+  if (tabId === 'dict') renderDictionary();
+}
+
+/* ---------- Quiz ---------- */
+function initQuizData() {
+  const selected = shuffle(MASTER_DICTIONARY).slice(0, QUIZ_LEN);
+  currentQuizQuestions = selected.map(item => {
+    const wrong = shuffle(MASTER_DICTIONARY.filter(d => d.term !== item.term && d.meaning !== item.meaning)).slice(0, 3);
+    const options = shuffle([{ text: item.meaning, isCorrect: true }, ...wrong.map(w => ({ text: w.meaning, isCorrect: false }))]);
+    return { questionTerm: item.term, explanation: item.explanation, options };
+  });
+  currentQuestionIdx = 0; score = 0; answered = false;
+  $('quiz-card-container').classList.remove('hidden');
+  $('quiz-summary').classList.add('hidden');
+  $('current-score').innerText = '0';
+  renderCurrentQuestion();
+}
+
+function renderCurrentQuestion() {
+  answered = false;
+  const q = currentQuizQuestions[currentQuestionIdx];
+  $('quiz-progress-text').innerText = `שאלה ${currentQuestionIdx + 1} מתוך ${QUIZ_LEN}`;
+  $('quiz-progress-bar').style.width = `${((currentQuestionIdx + 1) / QUIZ_LEN) * 100}%`;
+  $('question-text').innerText = `מה הפירוש המדויק של הביטוי "${q.questionTerm}"?`;
+
+  const box = $('options-container');
+  box.innerHTML = '';
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn w-full text-right p-4 rounded-xl border-2 border-slate-200 hover:border-amber-400 hover:bg-amber-50/50 transition-all font-medium text-slate-800 flex items-center justify-between group';
+    btn.onclick = () => checkAnswer(idx, opt.isCorrect, btn);
+    btn.innerHTML = `<span class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center border border-slate-200 group-hover:bg-amber-500 group-hover:text-white transition-colors">${idx + 1}</span>
+        <span class="text-base"></span></span>
+      <i data-lucide="circle" class="w-5 h-5 text-slate-300 group-hover:text-amber-500 transition-colors"></i>`;
+    btn.querySelector('.text-base').textContent = opt.text;
+    box.appendChild(btn);
+  });
+
+  $('feedback-container').className = 'hidden mx-6 md:mx-8 mb-6 p-4 rounded-xl border';
+  $('next-btn').classList.add('hidden');
+  $('next-btn').classList.remove('flex');
+  refreshIcons();
+}
+
+function checkAnswer(selectedIdx, isCorrect, btn) {
+  if (answered) return;
+  answered = true;
+  const q = currentQuizQuestions[currentQuestionIdx];
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(b => b.classList.add('pointer-events-none'));
+  const fb = $('feedback-container');
+
+  btn.classList.remove('border-slate-200');
+  if (isCorrect) {
+    score++;
+    $('current-score').innerText = score;
+    playSound('correct');
+    btn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+    fb.className = 'mx-6 md:mx-8 mb-6 p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-900 block';
+    $('feedback-title').innerText = 'תשובה נכונה! כל הכבוד';
+    $('feedback-icon').innerHTML = '<i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-600"></i>';
+  } else {
+    playSound('wrong');
+    btn.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-900');
+    q.options.forEach((opt, idx) => { if (opt.isCorrect) allBtns[idx].classList.add('border-emerald-500', 'bg-emerald-50'); });
+    fb.className = 'mx-6 md:mx-8 mb-6 p-4 rounded-xl border bg-rose-50 border-rose-200 text-rose-900 block';
+    $('feedback-title').innerText = 'תשובה לא מדויקת';
+    $('feedback-icon').innerHTML = '<i data-lucide="x-circle" class="w-6 h-6 text-rose-600"></i>';
+  }
+  $('feedback-explanation').innerText = q.explanation;
+  $('next-btn').classList.remove('hidden');
+  $('next-btn').classList.add('flex');
+  refreshIcons();
+}
+
+function nextQuestion() {
+  currentQuestionIdx++;
+  if (currentQuestionIdx < currentQuizQuestions.length) renderCurrentQuestion();
+  else showQuizSummary();
+}
+
+function showQuizSummary() {
+  $('quiz-card-container').classList.add('hidden');
+  $('quiz-summary').classList.remove('hidden');
+
+  quizzesPlayed++;
+  const newRecord = score > bestScore;
+  if (newRecord) bestScore = score;
+  saveProgress(); renderStats();
+
+  $('final-score').innerText = `${score} / ${QUIZ_LEN}`;
+  $('score-percentage').innerText = `${Math.round((score / QUIZ_LEN) * 100)}% הצלחה`;
+
+  let msg;
+  if (score === QUIZ_LEN) {
+    msg = 'אשריך! שליטה מוחלטת בארמית של הגמרא. תלמיד חכם אמיתי!';
+    try { if (window.confetti) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } }); } catch (e) {}
+  } else if (score >= 3) msg = 'עבודה יפה מאד! יש לך בסיס איתן, המשך לתרגל כדי להגיע לשליטה מלאה.';
+  else msg = 'התחלה טובה! מומלץ לעבור על כרטיסיות הזיכרון והמילון ולנסות שוב.';
+  if (newRecord && score > 0) msg += ' 🏆 שיא חדש!';
+  $('summary-feedback-msg').innerText = msg;
+}
+
+function restartQuiz() { initQuizData(); }
+
+/* ---------- Flashcards ---------- */
+function renderFlashcard() {
+  const wasFlipped = isCardFlipped;
+  isCardFlipped = false;
+  $('flashcard').classList.remove('rotate-y-180');
+  // מונע חשיפת התשובה של הכרטיס הבא בזמן אנימציית ההיפוך
+  if (wasFlipped) setTimeout(fillFlashcard, 250); else fillFlashcard();
+}
+
+function fillFlashcard() {
+  const item = flashcardsList[currentCardIdx];
+  $('card-counter').innerText = `כרטיס ${currentCardIdx + 1} מתוך ${flashcardsList.length}`;
+  $('card-category-tag').innerText = `קטגוריה: ${item.category}`;
+  $('card-front-text').innerText = item.term;
+  $('card-back-title').innerText = item.term;
+  $('card-back-meaning').innerText = item.meaning;
+  $('card-back-explanation').innerText = item.explanation;
+  updateMasterBtnUI();
+}
+
+function flipCard() {
+  playSound('flip');
+  isCardFlipped = !isCardFlipped;
+  $('flashcard').classList.toggle('rotate-y-180', isCardFlipped);
+}
+function nextCard() { currentCardIdx = (currentCardIdx + 1) % flashcardsList.length; renderFlashcard(); }
+function prevCard() { currentCardIdx = (currentCardIdx - 1 + flashcardsList.length) % flashcardsList.length; renderFlashcard(); }
+function shuffleFlashcards() {
+  flashcardsList = shuffle(flashcardsList);
+  currentCardIdx = 0;
+  renderFlashcard();
+  playSound('flip');
+}
+
+function toggleMasteredCurrentCard() {
+  const term = flashcardsList[currentCardIdx].term;
+  if (masteredCards.has(term)) masteredCards.delete(term); else masteredCards.add(term);
+  saveProgress(); renderStats(); updateMasterBtnUI();
+}
+
+function updateMasterBtnUI() {
+  const item = flashcardsList[currentCardIdx];
+  const btn = $('master-btn');
+  if (masteredCards.has(item.term)) {
+    btn.className = 'px-4 py-3 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-2xl transition-all flex items-center gap-2 text-sm font-bold';
+    $('master-btn-text').innerText = 'נקלט ונלמד ✓';
+  } else {
+    btn.className = 'px-4 py-3 bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-800 border border-slate-200 rounded-2xl transition-all flex items-center gap-2 text-sm font-medium';
+    $('master-btn-text').innerText = 'סמן כנלמד';
+  }
+}
+
+/* ---------- Dictionary ---------- */
+function renderCategoryFilters() {
+  const box = $('category-filters');
+  box.innerHTML = '';
+  CATEGORIES.forEach(([key, label]) => {
+    const b = document.createElement('button');
+    b.className = key === currentCategoryFilter ? PILL_ON : PILL_OFF;
+    b.textContent = label;
+    b.onclick = () => filterCategory(key);
+    box.appendChild(b);
+  });
+}
+
+function filterCategory(cat) {
+  currentCategoryFilter = cat;
+  renderCategoryFilters();
+  renderDictionary();
+}
+
+function renderDictionary() {
+  const grid = $('dictionary-grid');
+  grid.innerHTML = '';
+  const q = $('dict-search').value.trim().toLowerCase();
+
+  const filtered = MASTER_DICTIONARY.filter(it =>
+    (currentCategoryFilter === 'ALL' || it.category === currentCategoryFilter) &&
+    (it.term.includes(q) || it.meaning.includes(q) || it.explanation.includes(q))
+  );
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="col-span-full text-center py-12 bg-white rounded-2xl border border-slate-200">
+      <i data-lucide="book-x" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+      <p class="text-slate-500 text-sm font-medium">לא נמצאו מונחים המתאימים לחיפוש שלך</p></div>`;
+    refreshIcons();
+    return;
+  }
+
+  filtered.forEach(it => {
+    const done = masteredCards.has(it.term);
+    const card = document.createElement('div');
+    card.className = `bg-white p-5 rounded-2xl shadow-sm border ${done ? 'border-emerald-300' : 'border-slate-200'} hover:border-amber-400 hover:shadow-md transition-all flex flex-col justify-between`;
+    card.innerHTML = `
+      <div>
+        <div class="flex justify-between items-start mb-2 gap-2">
+          <h4 class="text-2xl font-black font-gemara text-gemara-800 tracking-wide"></h4>
+          <span class="flex gap-1 shrink-0">
+            ${done ? '<span class="text-[11px] font-bold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-md border border-emerald-200">נלמד ✓</span>' : ''}
+            <span class="cat text-[11px] font-bold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md border border-slate-200"></span>
+          </span>
+        </div>
+        <div class="mean text-base font-bold text-amber-700 mb-2"></div>
+        <p class="expl text-xs text-slate-600 leading-relaxed mb-3"></p>
+      </div>
+      <div class="bg-amber-50/60 p-2.5 rounded-xl border border-amber-200/50 text-xs text-slate-700 font-gemara"><span class="font-bold text-amber-800">דוגמה: </span><span class="ex"></span></div>`;
+    card.querySelector('h4').textContent = it.term;
+    card.querySelector('.cat').textContent = it.category;
+    card.querySelector('.mean').textContent = it.meaning;
+    card.querySelector('.expl').textContent = it.explanation;
+    card.querySelector('.ex').textContent = `"${it.example}"`;
+    grid.appendChild(card);
+  });
+  refreshIcons();
+}
+</script>
+</body>
+</html>
